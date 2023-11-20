@@ -1,6 +1,6 @@
 import database
 
-# test git
+
 
 MENU_PROMPT = """ - - Menu App - -
 
@@ -16,7 +16,8 @@ Please choose one of these options
 8) Sort menu by price: Ascending
 9) sort menu by price: Descending
 10) Empty DB
-11) Exit
+11) Remove an item from the menu
+12) Exit
 
 Your Selection: """
 
@@ -24,7 +25,7 @@ Your Selection: """
 def menu():
     connection = database.connect()
     database.create_tables(connection)
-    while (user_input := input(MENU_PROMPT)) != "11":
+    while (user_input := input(MENU_PROMPT)) != "12":
         if user_input == "1":
             prompt_add_new_item(connection)
         elif user_input == "2":
@@ -45,6 +46,8 @@ def menu():
             prompt_get_price_desc(connection)
         elif user_input == "10":
             prompt_clear_db(connection)
+        elif user_input == "11":
+            prompt_remove_item(connection)
         else:
             print("Invalid input, please try again")
 
@@ -62,7 +65,7 @@ def prompt_see_all_items(connection):
     food_menu = database.get_all_items(connection)
 
     for food in food_menu:
-        print(f"{food[1]}  {food[2]}  {food[3]}  ${food[4]}")
+        print(f"{food[1]} {food[2]} {food[3]} ${food[4]}")
 
 
 def prompt_get_food_by_name(connection):
@@ -105,14 +108,14 @@ def prompt_get_price_asc(connection):
     menu_by_asc = database.get_menu_by_asc(connection)
 
     for food in menu_by_asc:
-        print(f"{food[1]}  {food[2]}  {food[3]}  ${food[4]}")
+        print(f"{food[1]} {food[2]} {food[3]} ${food[4]}")
 
 
 def prompt_get_price_desc(connection):
     menu_by_desc = database.get_menu_by_desc(connection)
 
     for food in menu_by_desc:
-        print(f"{food[1]}  {food[2]}  {food[3]}  ${food[4]}")
+        print(f"{food[1]} {food[2]} {food[3]} ${food[4]}")
 
 
 # I researched this, and got it to work with your help
@@ -122,6 +125,10 @@ def prompt_clear_db(connection):
         database.clear_db(connection)
     else:
         pass
+
+
+def prompt_remove_item(connection):
+    name = input("What is the name of the item you wish to remove from the menu?: ")
 
 
 # def sort_by_price_asc(connection):
