@@ -1,7 +1,6 @@
 import database
 
 
-
 MENU_PROMPT = """ - - Menu App - -
 
 Please choose one of these options
@@ -130,9 +129,8 @@ def prompt_clear_db(connection):
 def prompt_remove_item(connection):
     name = input("What is the name of the item you wish to remove from the menu?: ")
 
+    database.delete_from_db(connection, name)
 
-# def sort_by_price_asc(connection):
-#    name =
 
 menu()
 

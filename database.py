@@ -36,6 +36,12 @@ ORDER BY cost DESC; """
 DELETE_THE_DB = "DELETE FROM food_menu;"
 
 
+DELETE_FROM_DB = """
+DELETE FROM food_menu
+WHERE name LIKE ?;
+"""
+
+
 def connect():
     return sqlite3.connect("data.db")
 
@@ -88,6 +94,11 @@ def get_menu_by_asc(connection):
 def get_menu_by_desc(connection):
     with connection:
         return connection.execute(GET_MENU_BY_DESC).fetchall()
+
+
+def delete_from_db(connection, name):
+    with connection:
+        return connection.execute(DELETE_FROM_DB, (name, )).fetchall()
 
 
 def clear_db(connection, ):
