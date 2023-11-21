@@ -14,8 +14,8 @@ Please choose one of these options
 7) See which option is most expensive
 8) Sort menu by price: Ascending
 9) sort menu by price: Descending
-10) Empty DB
-11) Remove an item from the menu
+10) Remove an item from the menu
+11) Empty DB
 12) Exit
 
 Your Selection: """
@@ -44,9 +44,9 @@ def menu():
         elif user_input == "9":
             prompt_get_price_desc(connection)
         elif user_input == "10":
-            prompt_clear_db(connection)
-        elif user_input == "11":
             prompt_remove_item(connection)
+        elif user_input == "11":
+            prompt_clear_db(connection)
         else:
             print("Invalid input, please try again")
 

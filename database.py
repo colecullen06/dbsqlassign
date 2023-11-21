@@ -98,7 +98,17 @@ def get_menu_by_desc(connection):
 
 def delete_from_db(connection, name):
     with connection:
-        return connection.execute(DELETE_FROM_DB, (name, )).fetchall()
+        all_items = connection.execute(GET_ALL_FOOD).fetchall()
+        names_in_db= []
+        for food in all_items:
+            names_in_db.append(food[1])
+        if name in names_in_db:
+            print("Item deleted")
+            return connection.execute(DELETE_FROM_DB, (name, )).fetchall()
+        else:
+            print(f"{name} is NOT in the database... why are you trying to delete it????")
+
+
 
 
 def clear_db(connection, ):
